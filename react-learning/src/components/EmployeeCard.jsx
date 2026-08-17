@@ -1,18 +1,16 @@
-export default function EmployeeCard() {
-    const employee = {
-        name: "อุ๋งอิ๋งง",
-        department: "IT",
-        position: "IT Intern",
-        isActive: false
-    }
-
+export default function EmployeeCard({
+    name,
+    department,
+    position,
+    isActive,
+}) {
     return (
         <article className="employee-card">
             <h2>ข้อมูลพนักงาน</h2>
-            <p>ชื่อ: {employee.name}</p>
-            <p>แผนก: {employee.department}</p>
-            <p>ตำแหน่ง: {employee.position}</p>
-            <p>สถานะ: {employee.isActive ? "กำลังฝึกงาน" : "ฝึกงานเสร็จสิ้น"}</p>
+            <p>ชื่อ: {name}</p>
+            <p>แผนก: {department}</p>
+            <p>ตำแหน่ง: {position}</p>
+            <p>สถานะ: {isActive ? "กำลังฝึกงาน" : "ฝึกงานเสร็จสิ้น"}</p>
         </article>
     )
 }
