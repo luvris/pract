@@ -20,6 +20,11 @@ function App() {
     },
   ]);
 
+  const [isListVisible, setIsListVisible] = useState(true);
+  function handleToggleList() {
+    setIsListVisible((currentVisibility) => !currentVisibility);
+  }
+
   function handleToggleEmployeeStatus(employeeId) {
     setEmployees((currentEmployees) => {
       return currentEmployees.map((employee) => {
@@ -35,19 +40,28 @@ function App() {
     });
   }
 
+
+  
   return (
     <main>
       <h1>Employee Management</h1>
 
       <Counter />
 
-      {employees.map((employee) => (
-        <EmployeeCard
-          key={employee.id}
-          employee={employee}
-          onToggle={handleToggleEmployeeStatus}
-        />
-      ))}
+      <button onClick={handleToggleList}>
+        {isListVisible ? "ซ่อนรายชื่อพนักงาน" : "แสดงรายชื่อพนักงาน"}
+      </button>
+      {isListVisible ? (
+        employees.map((employee) => (
+          <EmployeeCard
+            key={employee.id}
+            employee={employee}
+            onToggle={handleToggleEmployeeStatus}
+          />
+        ))
+      ) : (
+        <p>ยังไม่ได้แสดงรายชื่อพนักงาน</p>
+      )}
     </main>
   );
 }
