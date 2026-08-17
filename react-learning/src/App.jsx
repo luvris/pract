@@ -1,7 +1,39 @@
-import EmployeeCard from "./components/EmployeeCard";
+import { useState } from "react";
 import Counter from "./components/Counter";
+import EmployeeCard from "./components/EmployeeCard";
 
 function App() {
+  const [employees, setEmployees] = useState([
+    {
+      id: 1,
+      name: "Test",
+      department: "IT",
+      position: "IT Intern",
+      isActive: true,
+    },
+    {
+      id: 2,
+      name: "Test 2",
+      department: "HR",
+      position: "HR Intern",
+      isActive: false,
+    },
+  ]);
+
+  function handleToggleEmployeeStatus(employeeId) {
+    setEmployees((currentEmployees) => {
+      return currentEmployees.map((employee) => {
+        if (employee.id === employeeId) {
+          return {
+            ...employee,
+            isActive: !employee.isActive,
+          };
+        }
+
+        return employee;
+      });
+    });
+  }
 
   return (
     <main>
@@ -9,18 +41,13 @@ function App() {
 
       <Counter />
 
-      <EmployeeCard
-        name="Test"
-        department="IT"
-        position="It intern"
-        isActive={true}
-      />
-      <EmployeeCard
-        name="Test 2"
-        department="HR"
-        position="HR intern"
-        isActive={false}
-      />
+      {employees.map((employee) => (
+        <EmployeeCard
+          key={employee.id}
+          employee={employee}
+          onToggle={handleToggleEmployeeStatus}
+        />
+      ))}
     </main>
   );
 }

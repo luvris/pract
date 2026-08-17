@@ -1,27 +1,19 @@
-import { useState } from "react"
+export default function EmployeeCard({ employee, onToggle }) {
+  function handleToggleStatus() {
+    onToggle(employee.id);
+  }
 
-export default function EmployeeCard({
-    name,
-    department,
-    position,
-    isActive,
-}) {
+  return (
+    <article className="employee-card">
+      <h2>ข้อมูลพนักงาน</h2>
+      <p>ชื่อ: {employee.name}</p>
+      <p>แผนก: {employee.department}</p>
+      <p>ตำแหน่ง: {employee.position}</p>
+      <p>สถานะ: {employee.isActive ? "กำลังทำงาน" : "ไม่ได้ทำงาน"}</p>
 
-    const [isEmployeeActive, setIsEmployeeActive] = useState(isActive);
-    function handleToggleStatus(){
-        setIsEmployeeActive((currentStatus) => !currentStatus);
-    }
-
-    return (
-        <article className="employee-card">
-            <h2>ข้อมูลพนักงาน</h2>
-            <p>ชื่อ: {name}</p>
-            <p>แผนก: {department}</p>
-            <p>ตำแหน่ง: {position}</p>
-            <p>สถานะ: {isEmployeeActive ? "กำลังทำงาน" : "ไม่ได้ทำงาน"}</p>
-            <button onClick={handleToggleStatus}>
-                {isEmployeeActive ? "ปิดสถานะพนักงาน":"เปิดสถานะพนักงาน"}
-            </button>
-        </article>
-    )
+      <button onClick={handleToggleStatus}>
+        {employee.isActive ? "ปิดสถานะพนักงาน" : "เปิดสถานะพนักงาน"}
+      </button>
+    </article>
+  );
 }
