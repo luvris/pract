@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Counter from "./components/Counter";
 import EmployeeCard from "./components/EmployeeCard";
+import EmployeeForm from "./components/EmployeeForm";
 
 function App() {
   const [employees, setEmployees] = useState([
@@ -44,9 +45,14 @@ function App() {
     setEmployees([]);
   }
 
+  function handleAddEmployee(newEmployee){
+    console.log(newEmployee)
+  }
+
   return (
     <main>
       <h1>Employee Management</h1>
+      <EmployeeForm onAddEmployee={handleAddEmployee}/>
 
       <Counter />
 
@@ -54,7 +60,7 @@ function App() {
         {isListVisible ? "ซ่อนรายชื่อพนักงาน" : "แสดงรายชื่อพนักงาน"}
       </button>
       <button onClick={handleClearEmployees}>
-        ลบหนักงานทั้งหมด
+        ลบพนักงานทั้งหมด
       </button>
       {isListVisible ? (
         <>
