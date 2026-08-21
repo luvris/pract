@@ -40,8 +40,10 @@ function App() {
     });
   }
 
+  function handleClearEmployees() {
+    setEmployees([]);
+  }
 
-  
   return (
     <main>
       <h1>Employee Management</h1>
@@ -51,16 +53,23 @@ function App() {
       <button onClick={handleToggleList}>
         {isListVisible ? "ซ่อนรายชื่อพนักงาน" : "แสดงรายชื่อพนักงาน"}
       </button>
+      <button onClick={handleClearEmployees}>
+        ลบหนักงานทั้งหมด
+      </button>
       {isListVisible ? (
-        employees.map((employee) => (
-          <EmployeeCard
-            key={employee.id}
-            employee={employee}
-            onToggle={handleToggleEmployeeStatus}
-          />
-        ))
+        <>
+          {employees.length === 0 && <p>ไม่พบพนักงาน</p>}
+
+          {employees.map((employee) => (
+            <EmployeeCard
+              key={employee.id}
+              employee={employee}
+              onToggle={handleToggleEmployeeStatus}
+            />
+          ))}
+        </>
       ) : (
-        <p>ยังไม่ได้แสดงรายชื่อพนักงาน</p>
+        <p>คลิกปุ่มด้านบนเพื่อแสดงรายชื่อพนักงาน</p>
       )}
     </main>
   );
